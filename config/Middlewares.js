@@ -9,7 +9,7 @@ import logger from './Logger';
 
 module.exports = (app) => {
   app
-        .set('port', Number(process.env.PORT || 3003))
+        .set('port', Number(process.env.PORT || 5000))
         .set('json spaces', 4)
         .use(morgan('common', {
           stream: {
