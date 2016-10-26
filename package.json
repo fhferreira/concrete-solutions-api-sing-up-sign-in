@@ -5,7 +5,7 @@
   "main": "Clusters.js",
   "scripts": {
     "clusters": "npm run apidoc && babel-node Clusters.js",
-    "start": "npm run apidoc && babel-node Clusters.js",
+    "start": "babel-node Clusters.js",
     "restart": "npm run apidoc && nodemon --exec babel-node Server.js",
     "test": "mocha test/**/*.js",
     "lint": "eslint '**/*.js'",
