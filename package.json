@@ -1,0 +1,55 @@
+{
+  "name": "concrete-solutions-api-sing-up-sign-in",
+  "version": "1.0.0",
+  "description": "nodejs api concrete-solutions-api-sing-up-sign-in",
+  "main": "Server.js",
+  "scripts": {
+    "clusters": "npm run apidoc && babel-node Clusters.js",
+    "start": "npm run apidoc && babel-node Server.js",
+    "restart": "npm run apidoc && nodemon --exec babel-node Server.js",
+    "test": "mocha test/**/*.js",
+    "lint": "eslint '**/*.js'",
+    "lint:fix": "eslint '**/*.js' --fix",
+    "apidoc": "apidoc -i routes/ -o api/apidoc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/astesio/concrete-solutions-api-sing-up-sign-in.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/astesio/concrete-solutions-api-sing-up-sign-in/issues"
+  },
+  "homepage": "https://github.com/astesio/concrete-solutions-api-sing-up-sign-in#readme",
+  "devDependencies": {
+    "apidoc": "^0.16.1",
+    "chai": "^3.5.0",
+    "eslint": "^3.7.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.4.0",
+    "mocha": "^3.1.0",
+    "nodemon": "^1.11.0",
+    "supertest": "^2.0.0"
+  },
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "consign": "^0.1.2",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "helmet": "^2.3.0",
+    "method-override": "^2.3.6",
+    "mongoose": "^4.6.3",
+    "morgan": "^1.7.0",
+    "winston": "^2.2.0"
+  },
+  "apidoc": {
+    "name": "Documentation RESTful for concrete-solutions-api-sing-up-sign-in"
+  }
+}
