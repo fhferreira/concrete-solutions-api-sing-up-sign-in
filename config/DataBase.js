@@ -23,9 +23,7 @@ module.exports = (app) => {
     if (config.localhost) {
       uri = `${config.drive}://${config.host}/${config.database}`;
     } else {
-      // uri = `${config.drive}://${config.username}:${config.password}@${config.host}:${config.port}/${config.database}`;
-
-      uri = config.drive + '://' + config.username + ':' + config.password + config.host + ':'+ config.port + '/' + config.database;
+      uri = `${config.drive}://${config.username}:${config.password}@${config.host}:${config.port}/${config.database}`;
     }
     connectionDataBase(uri);
   }
