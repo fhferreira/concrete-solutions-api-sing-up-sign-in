@@ -25,6 +25,6 @@ module.exports = (app) => {
     } else {
       uri = `${config.drive}://${config.username}:${config.password}@${config.host}:${config.port}/${config.database}`;
     }
-    connectionDataBase('mongodb://concrete-solutions-user:4vxcxyjOkXXz@ds023042.mlab.com:23042/concrete-solutions');
+    connectionDataBase(uri);
   }
 };
