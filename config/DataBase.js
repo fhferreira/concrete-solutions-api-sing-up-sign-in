@@ -21,11 +21,10 @@ module.exports = (app) => {
 
   if (process.env.NODE_ENV !== 'test') {
     if (config.localhost) {
-      uri = `${config.drive}://${config.host}/${config.database}`;
-      connectionDataBase(uri);
+      uri = `'${config.drive}://${config.host}/${config.database}'`;
     } else {
-      uri = `${config.drive}://${config.username}:${config.password}@${config.host}:${config.port}/${config.database}`;
-      connectionDataBase(uri);
+      uri = `'${config.drive}://${config.username}:${config.password}@${config.host}:${config.port}/${config.database}'`;
     }
+    connectionDataBase(uri);
   }
 };
