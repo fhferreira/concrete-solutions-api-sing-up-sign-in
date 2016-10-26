@@ -2,10 +2,10 @@
   "name": "concrete-solutions-api-sing-up-sign-in",
   "version": "1.0.0",
   "description": "nodejs api concrete-solutions-api-sing-up-sign-in",
-  "main": "Server.js",
+  "main": "Clusters.js",
   "scripts": {
     "clusters": "npm run apidoc && babel-node Clusters.js",
-    "start": "babel-node Server.js",
+    "start": "babel-node Clusters.js",
     "restart": "npm run apidoc && nodemon --exec babel-node Server.js",
     "test": "mocha test/**/*.js",
     "lint": "eslint '**/*.js'",
