@@ -37,7 +37,7 @@ jspm_packages
 .node_repl_history
 
 #APIDOC
-api/*
+#api/*
 
 #LOG
 logs-api-authenticator/*
