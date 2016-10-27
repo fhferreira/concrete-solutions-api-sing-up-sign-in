@@ -1,12 +1,10 @@
 Concrete Solutions API - Sing-up Sign-in
 ===================================================================
 
-![Status Image](https://codeship.com/projects/c5862b10-7e10-0134-fbaf-42c59cf9d92c/status?branch=master)
-
-#Codeship Status:
+## Codeship Status:
 [ ![Codeship Status for astesio/concrete-solutions-api-sing-up-sign-in](https://codeship.com/projects/c5862b10-7e10-0134-fbaf-42c59cf9d92c/status?branch=master)](https://codeship.com/projects/181577)
 
-#Desafio node.js Concrete Solutions
+## Desafio node.js Concrete Solutions
 Crie um aplicativo backend que exporá uma API RESTful de criação de sing up/sign in.
 Todos os endpoints devem somente aceitar e somente enviar JSONs. O servidor deverá retornar JSON para os casos de endpoint não encontrado também.
 O aplicativo deverá persistir os dados (ver detalhes em requisitos).
