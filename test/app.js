@@ -2,7 +2,6 @@ import { request, expect } from './helpers';
 
 
 describe('Routes Index', () => {
-
     describe('Route GET /', () => {
         it('should return a 200 response', (done) => {
             request
