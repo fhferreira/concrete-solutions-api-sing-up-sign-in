@@ -8,7 +8,7 @@ describe('Routes Index', () => {
             request
                 .get('/')
                 .set('Accept', 'application/json')
-                .expect(200, done);
+                .expect(201, done);
         });
     });
 });
