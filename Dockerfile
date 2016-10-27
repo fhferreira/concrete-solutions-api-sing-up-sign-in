@@ -1,15 +1,17 @@
 FROM node:argon
 
+MAINTAINER Astésio José <astesiojose@gmail.com>
+
 # Create app directory
-RUN mkdir -p /usr/src/node-api-authenticator
-WORKDIR /usr/src/node-api-authenticator
+RUN mkdir -p /home/concrete-solutions-api-sing-up-sign-in
+WORKDIR /home/concrete-solutions-api-sing-up-sign-in
 
 # Install app dependencies
-COPY package.json /usr/src/node-api-authenticator
+COPY package.json /home/concrete-solutions-api-sing-up-sign-in
 RUN npm install
 
 # Bundle app source
-COPY . /usr/src/node-api-authenticator
+COPY . /home/concrete-solutions-api-sing-up-sign-in
 
-EXPOSE 3003
+EXPOSE 5000
 CMD [ "npm", "start" ]
