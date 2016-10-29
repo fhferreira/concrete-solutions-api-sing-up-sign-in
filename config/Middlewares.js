@@ -44,8 +44,6 @@ module.exports = (app) => {
 
 
 let isAuthorizationToken = function(req, res, next) {
-
-    // tratar 404 messagem de erro quando não achar o end point
     // verificar se tem tokerm para acdssar a rota
     console.log('isAuthorizationToken');
     return next();
