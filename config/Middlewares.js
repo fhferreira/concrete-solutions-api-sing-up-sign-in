@@ -1,16 +1,19 @@
-import bodyParser from 'body-parser';
-import express from 'express';
-import compression from 'compression';
-import path from 'path';
-import cors from 'cors';
-import helmet from 'helmet';
-import morgan from 'morgan';
-import logger from './Logger';
+import bodyParser           from 'body-parser';
+import express              from 'express';
+import compression          from 'compression';
+import path                 from 'path';
+import cors                 from 'cors';
+import helmet               from 'helmet';
+import morgan               from 'morgan';
+import logger               from './Logger';
+import expressValidator     from 'express-validator';
+
 
 module.exports = (app) => {
   app
         .set('port', Number(process.env.PORT || 5000))
         .set('json spaces', 4)
+        .use(helmet())
         .use(morgan('dev'))
         .use(morgan('common', {
           stream: {
@@ -19,7 +22,6 @@ module.exports = (app) => {
               }
           }
         }))
-        .use(helmet())
         .use(bodyParser.json())
         .use(cors({
           origin: ['http://localhost:5000', 'http://localhost:5001'],
@@ -30,8 +32,10 @@ module.exports = (app) => {
         .use(express.static('api'))
         .set('views', path.join(__dirname, '../views'))
         .set('view engine', 'ejs')
-        .use(bodyParser.urlencoded({ extended: true }))
+        .use(bodyParser.urlencoded({ extended: false }))
+        .use(expressValidator())
         .use(require('method-override')())
+
         .use('*', isAuthorizationToken)
         .use('/api', app.routerExpress)
         .use((req, res, next) => {
@@ -43,7 +47,7 @@ module.exports = (app) => {
 
 
 let isAuthorizationToken = function(req, res, next) {
-    
+
     // tratar 404 messagem de erro quando não achar o end point
     // verificar se tem tokerm para acdssar a rota
     console.log('isAuthorizationToken');
