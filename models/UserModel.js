@@ -1,4 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose         from 'mongoose';
+import bcrypt           from 'bcrypt-nodejs';
+import generationToken  from '../services/JWT';
+
+const currentDate = new Date();
 
 let Schema  = mongoose.Schema,
     userSchema = new Schema({
@@ -12,15 +16,31 @@ let Schema  = mongoose.Schema,
         token: String
     }, { versionKey: false });
 
-userSchema.methods.hasPassword = () => {
-    console.log('hasPassword');
+// I have a problem here try use arrow function, this.toObject was problem with scope lexical
+userSchema.methods.toJSON = function() {
+    var user = this.toObject();
+    delete user.password;
+    return user;
 };
 
 // I have a problem here with my arrow function uses lexical for updated the filed updated_at
 userSchema.pre('save', function(next) {
-    const currentDate = new Date();
-    this.updated_at = currentDate;
-    next();
+    let thisUser = this;
+
+    thisUser.updated_at = currentDate;
+    if(!thisUser.token) thisUser.token = generationToken(thisUser._id);
+    if (!thisUser.isModified('password')) return next();
+
+    bcrypt.genSalt(10, (err, salt) => {
+        if (err) return next(err);
+
+        bcrypt.hash(thisUser.password, salt, null, (err, hash) => {
+            if (err) return next(err);
+
+            thisUser.password = hash;
+            next();
+        });
+    });
 });
 
 let User = mongoose.model('User', userSchema);

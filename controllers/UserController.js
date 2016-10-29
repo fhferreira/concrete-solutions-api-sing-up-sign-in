@@ -13,10 +13,15 @@ module.exports = () => {
             newUser.password            = req.body.password;
             newUser.telephones          = req.body.telephones;
 
-            console.log(req.body);
-            newUser.save((err, user) => {
-                if(err) res.send(err);
-                res.status(201).json({user});
+            User.findOne({ email: newUser.email }, (err, user) => {
+                if(err) return next(err);
+                if(user) return res.status(409).json({ message: 'email already exists' });
+
+                console.log(req.body);
+                newUser.save((err, user) => {
+                    if(err) res.send(err);
+                    res.status(201).json({user});
+                });
             });
         },
         findUser: (req, res, next) => {
