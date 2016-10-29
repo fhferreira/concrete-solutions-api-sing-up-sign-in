@@ -6,11 +6,11 @@ let Schema  = mongoose.Schema,
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
         telephones: [{ ddd: String, number: String }],
+        last_login: { type: Date, default: Date.now() },
         created_at: { type: Date, default: Date.now() },
         updated_at: Date,
-        last_login: Date,
         token: String
-    });
+    }, { versionKey: false });
 
 userSchema.methods.hasPassword = () => {
     console.log('hasPassword');
@@ -19,14 +19,7 @@ userSchema.methods.hasPassword = () => {
 // I have a problem here with my arrow function uses lexical for updated the filed updated_at
 userSchema.pre('save', function(next) {
     const currentDate = new Date();
-
-    if(!this.created_at) {
-        this.created_at = currentDate;
-        this.last_login = currentDate;
-    }
-
     this.updated_at = currentDate;
-
     next();
 });
 
