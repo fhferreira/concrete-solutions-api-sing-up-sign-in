@@ -22,6 +22,7 @@ userSchema.pre('save', function(next) {
 
     if(!this.created_at) {
         this.created_at = currentDate;
+        this.last_login = currentDate;
     }
 
     this.updated_at = currentDate;
