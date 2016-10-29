@@ -1,12 +1,11 @@
 import bodyParser           from 'body-parser';
 import express              from 'express';
 import compression          from 'compression';
-import path                 from 'path';
 import cors                 from 'cors';
 import helmet               from 'helmet';
 import morgan               from 'morgan';
-import logger               from './Logger';
 import expressValidator     from 'express-validator';
+import logger               from './Logger';
 
 
 module.exports = (app) => {
@@ -30,15 +29,13 @@ module.exports = (app) => {
         }))
         .use(compression())
         .use(express.static('api'))
-        .set('views', path.join(__dirname, '../views'))
-        .set('view engine', 'ejs')
         .use(bodyParser.urlencoded({ extended: false }))
         .use(expressValidator())
         .use(require('method-override')())
 
         .use('*', isAuthorizationToken)
         .use('/api', app.routerExpress)
-        .use((req, res, next) => {
+        .use((req, res) => {
             res.status(404).json({
                 message: 'endpoint not found'
             });

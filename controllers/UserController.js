@@ -39,7 +39,6 @@ module.exports = () => {
                 user.comparePasswords(req.body.password, (err, isMatch) => {
                     if(err)         return next(err);
                     if(!isMatch)    return res.status(401).json({ message: 'User and/or password wrong' });
-
                     return res.status(200).json({values: user});
                 });
             });
