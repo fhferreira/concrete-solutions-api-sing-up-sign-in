@@ -17,7 +17,6 @@ module.exports = () => {
                 if(err) return next(err);
                 if(user) return res.status(409).json({ message: 'email already exists' });
 
-                console.log(req.body);
                 newUser.save((err, user) => {
                     if(err) res.send(err);
                     res.status(201).json({user});
@@ -25,11 +24,9 @@ module.exports = () => {
             });
         },
         findUser: (req, res, next) => {
-            User.find({}, (error, user)  => {
-                if(error) {
-                    return next(error);
-                }
-                res.json({values: user});
+            User.find({}, (err, user)  => {
+                if(err) return next(error);
+                res.status(200).json({values: user});
             });
         },
         login: (req, res, next) => {
