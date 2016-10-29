@@ -4,6 +4,9 @@ module.exports = () => {
 
     let controller = {
         createUser: (req, res, next) => {
+            // req.check("email", "Enter a valid email address.").isEmail();
+            // req.assert('email', 'email is required').notEmpty();
+
             let newUser = new User();
             newUser.name                = req.body.name;
             newUser.email               = req.body.email;
