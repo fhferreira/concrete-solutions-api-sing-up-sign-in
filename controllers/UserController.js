@@ -5,13 +5,15 @@ module.exports = () => {
     let controller = {
         createUser: (req, res, next) => {
             let newUser = new User();
-            newUser.name        = req.body.name;
-            newUser.email       = req.body.email;
-            newUser.password    = req.body.password;
+            newUser.name                = req.body.name;
+            newUser.email               = req.body.email;
+            newUser.password            = req.body.password;
+            newUser.telephones          = req.body.telephones;
 
-            newUser.save(err => {
+            console.log(req.body);
+            newUser.save((err, user) => {
                 if(err) res.send(err);
-                res.json({message: 'Created'});
+                res.status(201).json({user});
             });
         },
         findUser: (req, res, next) => {

@@ -5,10 +5,7 @@ let userSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    telephones: [{
-        ddd: String,
-        number: String
-    }],
+    telephones: [{ ddd: String, number: String }],
     created_at: { type: Date, default: Date.now() },
     updated_at: Date,
     last_login: Date,

@@ -11,6 +11,7 @@ module.exports = (app) => {
   app
         .set('port', Number(process.env.PORT || 5000))
         .set('json spaces', 4)
+        .use(morgan('dev'))
         .use(morgan('common', {
           stream: {
               write: (message) => {
@@ -21,7 +22,7 @@ module.exports = (app) => {
         .use(helmet())
         .use(bodyParser.json())
         .use(cors({
-          origin: ['http://localhost:9002', 'http://localhost:3003'],
+          origin: ['http://localhost:5000', 'http://localhost:5001'],
           methods: ['GET', 'POST', 'PUT', 'DELETE'],
           allowedHeaders: ['Content-Type', 'Authorization'],
         }))
@@ -30,5 +31,21 @@ module.exports = (app) => {
         .set('views', path.join(__dirname, '../views'))
         .set('view engine', 'ejs')
         .use(bodyParser.urlencoded({ extended: true }))
-        .use(require('method-override')());
+        .use(require('method-override')())
+        .use('*', isAuthorizationToken)
+        .use('/api', app.routerExpress)
+        .use((req, res, next) => {
+            res.status(404).json({
+                message: 'endpoint not found'
+            });
+        });
+};
+
+
+let isAuthorizationToken = function(req, res, next) {
+    
+    // tratar 404 messagem de erro quando não achar o end point
+    // verificar se tem tokerm para acdssar a rota
+    console.log('isAuthorizationToken');
+    return next();
 };
