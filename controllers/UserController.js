@@ -30,7 +30,19 @@ module.exports = () => {
             });
         },
         login: (req, res, next) => {
-            
+            // tratar email e senhas se nao sao nulos etc;
+
+            User.findOne({ email: req.body.email }, (err, user) => {
+                if(err)     return next(err);
+                if(!user)   return res.status(401).json({ message: 'User and/or password wrong' });
+
+                user.comparePasswords(req.body.password, (err, isMatch) => {
+                    if(err)         return next(err);
+                    if(!isMatch)    return res.status(401).json({ message: 'User and/or password wrong' });
+
+                    return res.status(200).json({values: user});
+                });
+            });
         }
     };
 

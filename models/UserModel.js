@@ -23,6 +23,12 @@ userSchema.methods.toJSON = function() {
     return user;
 };
 
+// Here I have same problem with lexical arrow function, password undefined
+userSchema.methods.comparePasswords = function(password, callback) {
+    let thisUser = this;
+    bcrypt.compare(password, thisUser.password, callback);
+};
+
 // I have a problem here with my arrow function uses lexical for updated the filed updated_at
 userSchema.pre('save', function(next) {
     let thisUser = this;
