@@ -32,8 +32,6 @@ module.exports = (app) => {
         .use(bodyParser.urlencoded({ extended: false }))
         .use(expressValidator())
         .use(require('method-override')())
-
-        .use('*', isAuthorizationToken)
         .use('/api', app.routerExpress)
         .use((req, res) => {
             res.status(404).json({
@@ -43,8 +41,4 @@ module.exports = (app) => {
 };
 
 
-let isAuthorizationToken = function(req, res, next) {
-    // verificar se tem tokerm para acdssar a rota
-    console.log('isAuthorizationToken');
-    return next();
-};
+

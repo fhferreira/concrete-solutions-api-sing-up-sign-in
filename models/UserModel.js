@@ -34,6 +34,7 @@ userSchema.pre('save', function(next) {
     let thisUser = this;
 
     thisUser.updated_at = currentDate;
+
     if(!thisUser.token) thisUser.token = generationToken(thisUser._id);
     if (!thisUser.isModified('password')) return next();
 

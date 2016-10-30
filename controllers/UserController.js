@@ -29,6 +29,32 @@ module.exports = () => {
                 res.status(200).json({values: user});
             });
         },
+        findUserId: (req, res, next) => {
+            if(!req.headers.authentication) return res.status(401).json({ message: 'not authorized' });
+
+            let token = req.headers.authentication.split(' ')[1];
+            console.log(token);
+
+            if(token) {
+                User.findById(req.params._id, (err, user) => {
+                    if(err)     return next(err);
+                    if(!user)   return res.status(401).json({ message: 'not autorized 1' });
+
+                    if(user.token === token) {
+                        // tratar date here
+                        if(true) {
+                            return res.status(200).json({ values: user });
+                        } else {
+                            return res.status(401).json({ message: 'invalid session' });
+                        }
+                    } else {
+                        return res.status(401).json({ message: 'not autorized 2' });
+                    }
+                });
+            } else {
+                return res.status(401).json({ message: 'not autorized 3' });
+            }
+        },
         login: (req, res, next) => {
             // tratar email e senhas se nao sao nulos etc;
 
@@ -39,7 +65,8 @@ module.exports = () => {
                 user.comparePasswords(req.body.password, (err, isMatch) => {
                     if(err)         return next(err);
                     if(!isMatch)    return res.status(401).json({ message: 'User and/or password wrong' });
-                    return res.status(200).json({values: user});
+
+                    return res.status(200).json({ user: user.toJSON() });
                 });
             });
         }
