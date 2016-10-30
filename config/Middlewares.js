@@ -1,11 +1,10 @@
-import bodyParser           from 'body-parser';
-import express              from 'express';
-import compression          from 'compression';
-import cors                 from 'cors';
-import helmet               from 'helmet';
-import morgan               from 'morgan';
-import expressValidator     from 'express-validator';
-import logger               from './Logger';
+import bodyParser from 'body-parser';
+import express from 'express';
+import compression from 'compression';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import logger from './Logger';
 
 
 module.exports = (app) => {
@@ -16,10 +15,10 @@ module.exports = (app) => {
         .use(morgan('dev'))
         .use(morgan('common', {
           stream: {
-              write: (message) => {
-                  logger.info(message);
-              }
-          }
+            write: (message) => {
+              logger.info(message);
+            },
+          },
         }))
         .use(bodyParser.json())
         .use(cors({
@@ -30,15 +29,12 @@ module.exports = (app) => {
         .use(compression())
         .use(express.static('api'))
         .use(bodyParser.urlencoded({ extended: false }))
-        .use(expressValidator())
         .use(require('method-override')())
         .use('/api', app.routerExpress)
         .use((req, res) => {
-            res.status(404).json({
-                message: 'endpoint not found'
-            });
+          res.status(404).json({
+            message: 'endpoint not found',
+          });
         });
 };
-
-
 

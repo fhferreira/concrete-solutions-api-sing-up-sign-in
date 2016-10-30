@@ -1,7 +1,7 @@
-module.exports = app => {
-    let userController = app.controllers.UserController;
+module.exports = (app) => {
+  const userController = app.controllers.UserController;
 
-    app.routerExpress
+  app.routerExpress
         /**
          * @api {get} /user/:id Request User information
          * @apiName GetUser

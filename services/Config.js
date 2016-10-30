@@ -1,3 +1,3 @@
 module.exports = {
-    SIGNATURE: 'Bearer'
+  SIGNATURE: 'Bearer',
 };
