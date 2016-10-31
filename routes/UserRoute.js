@@ -37,7 +37,7 @@ module.exports = (app) => {
          * @apiSuccess {String} firstname Firstname of the User.
          * @apiSuccess {String} lastname  Lastname of the User.
          */
-        .get('/user', userController.findUser)
+        .get('/user', userController.loadAllUser)
         /**
          * @api {get} /user/:id Request User information
          * @apiName GetUser

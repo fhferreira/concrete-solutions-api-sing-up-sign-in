@@ -24,7 +24,7 @@ module.exports = () => {
         });
       });
     },
-    findUser: (req, res, next) => {
+    loadAllUser: (req, res, next) => {
       User.find({}, (err, user) => {
         if (err) return next(error);
         res.status(200).json({ values: user });
